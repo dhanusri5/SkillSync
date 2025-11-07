@@ -1,15 +1,18 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { loginUser } from "../controller/authcontroller";
+import Button from "../../../components/button";
 
-export default function Login() {
+export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [err, setErr] = useState("");
   const navigate = useNavigate();
 
-  async function handleSubmit(e: { preventDefault: () => void; }) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setErr("");
+    
     const res = await loginUser({ email, password });
     if (res.success) {
       navigate("/dashboard");
@@ -17,26 +20,51 @@ export default function Login() {
       setErr(res.message || "Login failed");
     }
   }
+
   return (
-    <div style={{ maxWidth: 400, margin: "2rem auto" }}>
-      <h2>Login</h2>
-      {err && <p style={{ color: "red" }}>{err}</p>}
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Email</label>
-          <input value={email} onChange={e => setEmail(e.target.value)} />
+    <div className="auth-page">
+      <form className="auth-form" onSubmit={handleSubmit}>
+        <h2>Welcome back</h2>
+        <div className="auth-sub">Sign in to your Skill Sync account</div>
+        {err && <p className="error-msg">{err}</p>}
+
+        <label htmlFor="login-email">Email</label>
+        <input
+          id="login-email"
+          className="auth-input"
+          type="email"
+          placeholder="Enter your email"
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+          required
+          autoComplete="email"
+        />
+
+        <label htmlFor="login-password">Password</label>
+        <input
+          id="login-password"
+          className="auth-input"
+          type="password"
+          placeholder="Enter your password"
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+          required
+          autoComplete="current-password"
+        />
+
+        <Button 
+          type="submit" 
+          variant="primary"
+          size="medium"
+          fullWidth
+          disabled={!email || !password}
+        >
+          Sign In
+        </Button>
+
+        <div className="auth-note">
+          Don't have an account? <Link to="/register">Sign up</Link>
         </div>
-        <div style={{ marginTop: "1rem" }}>
-          <label>Password</label>
-          <input
-            type="password"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-          />
-        </div>
-        <button style={{ marginTop: "1rem" }} type="submit">
-          Sign in
-        </button>
       </form>
     </div>
   );
