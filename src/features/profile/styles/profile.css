@@ -1,0 +1,132 @@
+.profile-content {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 0 2rem 0;
+}
+.profile-title {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #35363a;
+  text-align: left;
+}
+.profile-email {
+  color: #777;
+  font-size: 1.02rem;
+  margin-bottom: 1.7rem;
+}
+.profile-topstats {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  align-items: center;
+}
+.profile-topstat-card {
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 1px 6px rgba(40,40,70,.08);
+  text-align: center;
+  padding: 1.1rem 1.7rem;
+  min-width: 120px;
+}
+.profile-topstat-value {
+  font-size: 1.7rem;
+  font-weight: 600;
+  color: #6366f1;
+}
+.profile-topstat-label {
+  color: #7e7e7e;
+  margin-top: 0.4rem;
+  font-size: 1rem;
+}
+.profile-edit-btn {
+  margin-left: auto;
+  padding: 0.7rem 1.2rem;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.68rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+.profile-section {
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 1px 6px rgba(40,40,70,.06);
+  padding: 1.2rem 1rem;
+  margin-top: 1rem;
+}
+.profile-section-title {
+  font-size: 1.14rem;
+  font-weight: 600;
+  margin-bottom: 0.95rem;
+  display: flex;
+  align-items: center;
+}
+.profile-edit-icon {
+  color: #bbb;
+  margin-left: 0.7rem;
+  font-size: 1.17rem;
+}
+
+.profile-tags {
+  display: flex;
+  gap: 0.68rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.3rem;
+}
+.profile-tag {
+  background: #e2e8f0;
+  color: #374151;
+  padding: 0.44rem 1.2rem;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 500;
+}
+.profile-projects {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.profile-project-card {
+  background: #f9fafb;
+  border-radius: 0.7rem;
+  padding: 0.9rem 1rem;
+  margin-bottom: 0.3rem;
+  box-shadow: 0 1px 4px rgba(40,40,70,.04);
+}
+.profile-project-title {
+  font-size: 1.12rem; font-weight: bold; margin-bottom: 0.2rem;
+}
+.profile-project-desc {
+  color: #767676;
+  margin-bottom: 0.1rem;
+}
+.profile-project-year {
+  font-size: 0.97rem;
+  color: #6b7280;
+}
+.profile-activity-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+.profile-activity-item {
+  background: #f4f5f8;
+  border-radius: 0.7rem;
+  padding: 0.7rem 1rem;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.profile-activity-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 10px;
+  display: inline-block;
+  margin-right: 0.6rem;
+}
+.profile-activity-time {
+  margin-left: auto;
+  color: #a8a8a8;
+  font-size: 0.95rem;
+}

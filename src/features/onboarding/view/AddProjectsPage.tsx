@@ -22,14 +22,18 @@ const AddProjectsPage: React.FC = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [technologies, setTechnologies] = useState("");
+  const [error, setError] = useState("");
+
+  // Update onboarding model and local storage
   useEffect(() => {
     onboardingData.projects = projects.map((project) => project.title);
     localStorage.setItem("projects", JSON.stringify(projects));
   }, [projects]);
 
+  // Add project
   const addProject = () => {
     if (!title.trim()) {
-      alert("Please enter a project title.");
+      setError("Please enter a project title.");
       return;
     }
 
@@ -42,10 +46,33 @@ const AddProjectsPage: React.FC = () => {
     const updated = [...projects, newProject];
     setProjects(updated);
 
-    // Reset input fields
+    // Reset fields and clear error
     setTitle("");
     setDescription("");
     setTechnologies("");
+    setError("");
+  };
+
+  // Remove project
+  const removeProject = (index: number) => {
+    const updated = [...projects];
+    updated.splice(index, 1);
+    setProjects(updated);
+  };
+
+  // Handle Finish
+  const handleFinish = () => {
+    if (projects.length === 0) {
+      setError("Please add at least one project before continuing.");
+      return;
+    }
+
+    // Save to onboarding data and localStorage
+    onboardingData.projects = projects.map((p) => p.title);
+    localStorage.setItem("onboardingData", JSON.stringify(onboardingData));
+
+    // Navigate to dashboard
+    navigate("/dashboard");
   };
 
   return (
@@ -67,7 +94,7 @@ const AddProjectsPage: React.FC = () => {
         </div>
 
         <h2>Past Projects</h2>
-        <p>Tell us about projects you’ve worked on.</p>
+        <p>Tell us about the projects you’ve worked on or contributed to.</p>
 
         {/* Input form */}
         <div className="input-group vertical">
@@ -92,12 +119,19 @@ const AddProjectsPage: React.FC = () => {
           <button onClick={addProject}>Add Project</button>
         </div>
 
+        {error && <p className="error-message">{error}</p>}
+
         {/* Display added projects */}
         <div className="projects-list">
           {projects.length > 0 ? (
             projects.map((proj, i) => (
               <div key={i} className="project-card">
-                <h3>{proj.title}</h3>
+                <div className="project-header">
+                  <h3>{proj.title}</h3>
+                  <span className="remove-btn" onClick={() => removeProject(i)}>
+                    ✕
+                  </span>
+                </div>
                 {proj.description && <p className="desc">{proj.description}</p>}
                 {proj.technologies && (
                   <p className="tech">
@@ -116,10 +150,7 @@ const AddProjectsPage: React.FC = () => {
           <button className="back-btn" onClick={() => navigate("/onboarding/interests")}>
             Back
           </button>
-          <button
-            className="next-btn"
-            onClick={() => alert("✅ Onboarding Completed!")}
-          >
+          <button className="next-btn" onClick={handleFinish}>
             Finish
           </button>
         </div>
