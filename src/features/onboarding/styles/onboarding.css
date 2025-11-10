@@ -1,208 +1,195 @@
-/* ==============================
-   Base Layout (Dark BG)
-============================== */
 .onboarding-container {
+  background: linear-gradient(135deg, #1e1e2f, #121212);
+  color: white;
   min-height: 100vh;
-  background: #1A1A1A;
   display: flex;
-  align-items: center;
   justify-content: center;
-  padding: 2rem;
-  font-family: "Poppins", sans-serif;
-  color: #111827;
+  align-items: center;
+  flex-direction: column;
   position: relative;
+  overflow: hidden;
+  font-family: "Poppins", sans-serif;
+  padding: 2rem 1rem;
 }
 
-/* ==============================
-   Logo
-============================== */
+/* Logo */
 .logo {
   position: absolute;
-  top: 60px;
-  left: 60px;
+  top: 20px;
+  right: 40px;
+  font-family: "Press Start 2P", monospace;
+  font-size: 1.5rem;
+  letter-spacing: 4px;
   color: #ffffff;
-  font-weight: 700;
-  font-size: 2rem;
-  letter-spacing: 2px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
+  text-transform: uppercase;
   user-select: none;
+  z-index: 10;
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.8), 0 0 12px rgba(255, 255, 255, 0.5);
 }
 
-/* ==============================
-   Card Styling (matches auth-form)
-============================== */
+/* Onboarding Card */
 .onboarding-card {
-  background: #ffffff;
-  padding: 2.5rem 3rem;
-  border-radius: 24px;
-  box-shadow: 0 6px 28px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 700px;
-  box-sizing: border-box;
+  background: rgba(40, 40, 50, 0.85);
+  backdrop-filter: blur(15px);
+  padding: 3rem 4rem;
+  border-radius: 1.5rem;
+  width: 700px;
+  max-width: 90%;
   text-align: center;
-  position: relative;
-  animation: fadeIn 0.4s ease-in-out;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  animation: fadeIn 0.5s ease-in-out;
 }
 
-/* ==============================
-   Step Indicators
-============================== */
+/* Step Indicators */
 .step-indicators {
   display: flex;
   justify-content: center;
   margin-bottom: 1.5rem;
-  gap: 0.6rem;
+  flex-wrap: wrap;
 }
 
 .step-indicators .dot {
-  width: 10px;
-  height: 10px;
+  width: 12px;
+  height: 12px;
+  margin: 0 8px;
   border-radius: 50%;
-  background: #d1d5db;
-  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.3);
   cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .step-indicators .dot.active {
-  background: #000;
+  background: #3f82ff;
+  box-shadow: 0 0 8px rgba(63, 130, 255, 0.8);
 }
 
-.step-indicators .dot:hover {
-  transform: scale(1.2);
-}
-
-/* ==============================
-   Titles
-============================== */
-.onboarding-card h2 {
-  font-size: 1.75rem;
-  font-weight: 600;
-  color: #111827;
-  margin-bottom: 0.5rem;
-}
-
-.onboarding-card p {
-  color: #6b7280;
-  font-size: 1rem;
-  margin-bottom: 1.5rem;
-}
-
-/* ==============================
-   Input Groups
-============================== */
+/* Input Group - Vertical Layout */
 .input-group {
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /* stack vertically */
+  justify-content: flex-start;
+  align-items: stretch;
+  margin: 1.5rem 0;
   gap: 1rem;
-  margin-bottom: 1.5rem;
+  width: 100%;
 }
 
 .input-group input,
 .input-group textarea {
   width: 100%;
-  padding: 0.75rem 1rem;
+  padding: 0.8rem 1rem;
+  border: none;
   border-radius: 8px;
-  border: 1px solid #e5e7eb;
-  background: #fff;
-  color: #1f2937;
   font-size: 1rem;
-  transition: border-color 0.2s ease;
-  box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  outline: none;
+  transition: all 0.3s ease;
+  resize: none;
+}
+
+.input-group input::placeholder,
+.input-group textarea::placeholder {
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .input-group input:focus,
 .input-group textarea:focus {
-  outline: none;
-  border-color: #6366f1;
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 8px rgba(63, 130, 255, 0.8);
 }
 
-.input-group textarea {
-  resize: vertical;
-  min-height: 80px;
+.input-group button {
+  align-self: flex-end;
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  background: #3f82ff;
+  color: #ffffff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-/* ==============================
-   Tags / Chips
-============================== */
+.input-group button:hover {
+  background: #2f6edc;
+  box-shadow: 0 0 10px rgba(63, 130, 255, 0.8);
+}
+
+/* Tag Container */
 .tag-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
   justify-content: center;
-  margin: 1rem 0 1.5rem 0;
+  gap: 0.8rem;
+  margin: 1.5rem 0;
 }
 
-.tag {
-  background: #f3f4f6;
+.tag-container .tag {
+  padding: 0.6rem 1rem;
   border-radius: 20px;
-  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
   font-size: 0.9rem;
-  color: #1f2937;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
 }
 
-.tag.selected {
-  background: #000;
-  color: #fff;
+.tag-container .tag.selected {
+  background: #3f82ff;
+  box-shadow: 0 0 8px rgba(63, 130, 255, 0.8);
 }
 
-.tag:hover {
-  background: #e5e7eb;
-}
-
-/* ==============================
-   Buttons (uses login page styles)
-============================== */
+/* Buttons */
 .buttons {
   display: flex;
   justify-content: space-between;
-  gap: 1rem;
   flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
 }
 
 .buttons .back-btn,
 .buttons .next-btn {
-  flex: 1;
-  min-width: 120px;
+  padding: 0.8rem 1.5rem;
   border: none;
   border-radius: 8px;
-  font-weight: 600;
   font-size: 1rem;
-  padding: 0.75rem 1.25rem;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
+  flex: 1;
+  min-width: 120px;
 }
 
 .buttons .back-btn {
-  background: #f3f4f6;
-  color: #1f2937;
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
 }
 
 .buttons .back-btn:hover {
-  background: #e5e7eb;
+  background: rgba(255, 255, 255, 0.2);
 }
 
 .buttons .next-btn {
-  background: #000;
-  color: #fff;
+  background: #3f82ff;
+  color: #ffffff;
 }
 
 .buttons .next-btn:hover {
-  background: #111827;
-  transform: translateY(-1px);
+  background: #2f6edc;
+  box-shadow: 0 0 10px rgba(63, 130, 255, 0.8);
 }
 
-/* ==============================
-   Animations
-============================== */
+/* Animations */
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
@@ -210,18 +197,43 @@
   }
 }
 
-/* ==============================
-   Responsive Design
-============================== */
-@media (max-width: 768px) {
+/* 🌍 RESPONSIVENESS */
+
+/* Tablets */
+@media (max-width: 992px) {
+  .onboarding-card {
+    padding: 2.5rem 2rem;
+    width: 90%;
+  }
+
   .logo {
-    top: 20px;
-    left: 20px;
-    font-size: 1.25rem;
+    font-size: 1.2rem;
+    right: 20px;
+  }
+
+  .buttons {
+    justify-content: center;
+  }
+
+  .buttons .back-btn,
+  .buttons .next-btn {
+    flex: 0 0 auto;
+    width: 45%;
+  }
+}
+
+/* Mobiles */
+@media (max-width: 600px) {
+  .logo {
+    top: 10px;
+    right: 10px;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
   }
 
   .onboarding-card {
-    padding: 1.8rem 1.5rem;
+    padding: 1.8rem 1.2rem;
+    border-radius: 1rem;
   }
 
   .buttons {
@@ -231,5 +243,10 @@
   .buttons .back-btn,
   .buttons .next-btn {
     width: 100%;
+  }
+
+  .tag-container .tag {
+    font-size: 0.8rem;
+    padding: 0.5rem 0.8rem;
   }
 }
