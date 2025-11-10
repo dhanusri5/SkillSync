@@ -1,6 +1,6 @@
 import Login from "../features/auth/view/loginPage";
 import Register from "../features/auth/view/RegisterPage";
-import Dashboard from "../features/dashboard/view/dashBoardScreen";
+import Dashboard from "../features/dashboard/view/DashboardLayout";
 import SkillsPage from "../features/onboarding/view/SkillsPage";
 import AddInterestsPage from "../features/onboarding/view/AddInterestsPage";
 import AddProjectsPage from "../features/onboarding/view/AddProjectsPage";
