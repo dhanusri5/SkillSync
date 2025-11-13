@@ -1,35 +1,40 @@
-import { loginApi, registerApi } from "../model/authModel";
+// src/features/auth/controller/authController.js
 
-const BASE_URL = "https://skillapi.ganidande.com";
+import { loginApi, registerApi } from "../model/authModel.js";
+
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 /**
- * Login user
+ * LOGIN USER
  * @param {Object} credentials - { email, password }
  * @returns {Promise<{ success: boolean, message?: string, token?: string }>}
  */
 export async function loginUser(credentials) {
   try {
-    // Input validation
     if (!credentials.email || !credentials.password) {
       return { success: false, message: "Email and password are required" };
     }
-    if (!credentials.email.includes("@")) {
-      return { success: false, message: "Please enter a valid email" };
-    }
-    if (credentials.password.length < 6) {
-      return { success: false, message: "Password must be at least 6 characters" };
-    }
 
-    // Call login API
-    const res = await loginApi(`${BASE_URL}/auth/login`, credentials);
+    console.log("🔹 Login URL:", `${BASE_URL}/auth/login`);
+    console.log("🔹 Sending data:", credentials);
 
-    if (res.success) {
-      // Store auth token
+    const res = await loginApi(`${BASE_URL}/auth/login`, {
+      email: credentials.email,
+      password: credentials.password,
+    });
+
+    console.log("🔹 Login API Response:", res);
+
+    if (res.id || res.name) {
       if (res.token) localStorage.setItem("authToken", res.token);
-      return res;
+      return { success: true, message: "Login successful!" };
     }
 
-    return { success: false, message: res.message || "Invalid credentials" };
+    if (res.detail) {
+      return { success: false, message: res.detail };
+    }
+
+    return { success: false, message: "Invalid credentials" };
   } catch (error) {
     console.error("Login error:", error);
     return { success: false, message: "An error occurred during login" };
@@ -37,34 +42,37 @@ export async function loginUser(credentials) {
 }
 
 /**
- * Register new user
- * @param {Object} data - { fullName, email, password }
+ 
+ * REGISTER USER
+ * @param {Object} data - { email, name, password }
  * @returns {Promise<{ success: boolean, message?: string, userId?: number }>}
  */
 export async function registerUser(data) {
   try {
-    // Input validation
-    if (!data.fullName || !data.email || !data.password) {
+    if (!data.email || !data.name || !data.password) {
       return { success: false, message: "All fields are required" };
     }
-    if (!data.email.includes("@")) {
-      return { success: false, message: "Please enter a valid email" };
-    }
-    if (data.password.length < 6) {
-      return { success: false, message: "Password must be at least 6 characters" };
-    }
-    if (data.fullName.length < 2) {
-      return { success: false, message: "Please enter a valid name" };
+
+    console.log("🔹 Register URL:", `${BASE_URL}/auth/register`);
+    console.log("🔹 Sending data:", data);
+
+    const res = await registerApi(`${BASE_URL}/auth/register`, {
+      email: data.email,
+      name: data.name,
+      password: data.password,
+    });
+
+    console.log("🔹 Register API Response:", res);
+
+    if (res.id) {
+      return { success: true, message: "Registration successful!" };
     }
 
-    // Call register API
-    const res = await registerApi(`${BASE_URL}/auth/register`, data);
-
-    if (res.success) {
-      return res;
+    if (res.detail) {
+      return { success: false, message: res.detail };
     }
 
-    return { success: false, message: res.message || "Registration failed" };
+    return { success: false, message: "Registration failed" };
   } catch (error) {
     console.error("Registration error:", error);
     return { success: false, message: "An error occurred during registration" };
